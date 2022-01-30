@@ -38,7 +38,23 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let subexpr = []
+    for (let i = 0; i < expr.length/10; i++){
+        subexpr[i] = expr.slice(i*10,i*10+10)
+    }
+subexpr = subexpr.map(el => String(+el))
+let arr = []
+    for (let key in subexpr){
+    let res = ""
+        if (subexpr[key] !== "NaN"){
+            for (let i = 0; i < subexpr[key].length; i=i+2){
+                (subexpr[key][i]+subexpr[key][i+1] === "10")? res += "." : res += "-"
+            }
+            arr.push(MORSE_TABLE[res])
+        } else {arr.push(" ")}
+    }
+
+return arr.join("")
 }
 
 module.exports = {
